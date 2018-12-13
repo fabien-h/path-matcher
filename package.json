@@ -1,0 +1,25 @@
+{
+  "name": "path-matcher",
+  "version": "0.0.1",
+  "description": "A simple utility to match a path to a regex.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "parcel build src/index.ts --global path-matcher --out-dir dist",
+    "parcel:dev": "parcel src/index.ts --global path-matcher --out-dir dist",
+    "dev": "concurrently \"npm run test\" \"npm run parcel:dev\"",
+    "test": "jest --watch",
+    "tt": "tsc -p src/index.ts"
+  },
+  "author": "Fabien Huet <fabien.huet@gmail.com> (https://wax-o.com)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^23.3.10",
+    "concurrently": "^4.1.0",
+    "jest": "^23.6.0",
+    "parcel-bundler": "^1.10.3",
+    "parcel-plugin-typescript": "^1.0.0",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
+  }
+}
