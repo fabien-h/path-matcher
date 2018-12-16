@@ -9,11 +9,11 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rollup --config rollup.config.prod.js",
     "build:dev-watch": "rollup -w --config rollup.config.dev.js",
+    "build": "rollup --config rollup.config.prod.js",
     "dev": "concurrently \"npm run build:dev-watch\" \"npm run test\"",
-    "test": "jest --watch",
-    "tt": "tsc -p src/index.ts"
+    "release": "release-it --dry-run",
+    "test": "jest --watch"
   },
   "author": "Fabien Huet <fabien.huet@gmail.com> (https://wax-o.com)",
   "license": "MIT",
@@ -21,6 +21,7 @@
     "@types/jest": "^23.3.10",
     "concurrently": "^4.1.0",
     "jest": "^23.6.0",
+    "release-it": "^9.1.0",
     "rollup": "^0.67.4",
     "rollup-plugin-copy": "^0.2.3",
     "rollup-plugin-typescript2": "^0.18.1",
