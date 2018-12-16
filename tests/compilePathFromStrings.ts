@@ -4,42 +4,55 @@
 
   describe('Build matchers from strings', () => {
     test('Harcoded path', () => {
-      expect(pathMatcher.compilePath('/foo/bar/baz')).toEqual({
-        path: '/foo/bar/baz',
+      expect(pathMatcher.compileTemplate('/foo/bar/baz')).toEqual({
+        template: '/foo/bar/baz',
         name: '/foo/bar/baz',
-        matcher: /\/foo\/bar\/baz\/?/,
+        regex: /\/foo\/bar\/baz\/?/,
+        segments: [null, null, null],
+      });
+    });
+
+    test('Harcoded path without initial slash', () => {
+      expect(pathMatcher.compileTemplate('foo/bar/baz')).toEqual({
+        template: 'foo/bar/baz',
+        name: 'foo/bar/baz',
+        regex: /\/foo\/bar\/baz\/?/,
+        segments: [null, null, null],
       });
     });
 
     test('Harcoded path width trailing slash', () => {
-      expect(pathMatcher.compilePath('/foo/bar/baz/')).toEqual({
-        path: '/foo/bar/baz/',
+      expect(pathMatcher.compileTemplate('/foo/bar/baz/')).toEqual({
+        template: '/foo/bar/baz/',
         name: '/foo/bar/baz/',
-        matcher: /\/foo\/bar\/baz\/?/,
+        regex: /\/foo\/bar\/baz\/?/,
+        segments: [null, null, null],
       });
     });
 
     test('Path with parametters', () => {
-      expect(pathMatcher.compilePath('/foo/{bar}/{baz}')).toEqual({
-        path: '/foo/{bar}/{baz}',
+      expect(pathMatcher.compileTemplate('/foo/{bar}/{baz}')).toEqual({
+        template: '/foo/{bar}/{baz}',
         name: '/foo/{bar}/{baz}',
-        matcher: new RegExp(
+        regex: new RegExp(
           `\/foo\/${pathAllowedCharsRegex.source}\/${
             pathAllowedCharsRegex.source
           }\/?`,
         ),
+        segments: [null, 'bar', 'baz'],
       });
     });
 
     test('Path with optional parametters', () => {
-      expect(pathMatcher.compilePath('/foo/{bar}/{baz?}')).toEqual({
-        path: '/foo/{bar}/{baz?}',
+      expect(pathMatcher.compileTemplate('/foo/{bar}/{baz?}')).toEqual({
+        template: '/foo/{bar}/{baz?}',
         name: '/foo/{bar}/{baz?}',
-        matcher: new RegExp(
+        regex: new RegExp(
           `\/foo\/${pathAllowedCharsRegex.source}(\/${
             pathAllowedCharsRegex.source
           })?\/?`,
         ),
+        segments: [null, 'bar', 'baz'],
       });
     });
   });

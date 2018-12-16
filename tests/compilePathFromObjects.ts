@@ -5,90 +5,96 @@
   describe('Build matchers from objects', () => {
     test('Harcoded path', () => {
       expect(
-        pathMatcher.compilePath({
-          path: '/foo/bar/baz',
+        pathMatcher.compileTemplate({
+          template: '/foo/bar/baz',
           name: 'my_path_name',
         }),
       ).toEqual({
-        path: '/foo/bar/baz',
+        template: '/foo/bar/baz',
         name: 'my_path_name',
-        matcher: /\/foo\/bar\/baz\/?/,
+        regex: /\/foo\/bar\/baz\/?/,
+        segments: [null, null, null],
       });
     });
 
     test('Harcoded path width trailing slash', () => {
       expect(
-        pathMatcher.compilePath({
-          path: '/foo/bar/baz',
+        pathMatcher.compileTemplate({
+          template: '/foo/bar/baz',
           name: 'my_path_name',
         }),
       ).toEqual({
-        path: '/foo/bar/baz',
+        template: '/foo/bar/baz',
         name: 'my_path_name',
-        matcher: /\/foo\/bar\/baz\/?/,
+        regex: /\/foo\/bar\/baz\/?/,
+        segments: [null, null, null],
       });
     });
 
     test('Path with parametters', () => {
       expect(
-        pathMatcher.compilePath({
-          path: '/foo/{bar}',
+        pathMatcher.compileTemplate({
+          template: '/foo/{bar}',
           name: 'my_path_name',
         }),
       ).toEqual({
-        path: '/foo/{bar}',
+        template: '/foo/{bar}',
         name: 'my_path_name',
-        matcher: new RegExp(`\/foo\/${pathAllowedCharsRegex.source}\/?`),
+        regex: new RegExp(`\/foo\/${pathAllowedCharsRegex.source}\/?`),
+        segments: [null, 'bar'],
       });
     });
   });
 
   test('Path with optional parametters', () => {
     expect(
-      pathMatcher.compilePath({
-        path: '/foo/{bar}/{baz?}',
+      pathMatcher.compileTemplate({
+        template: '/foo/{bar}/{baz?}',
         name: 'my_path_name',
       }),
     ).toEqual({
-      path: '/foo/{bar}/{baz?}',
+      template: '/foo/{bar}/{baz?}',
       name: 'my_path_name',
-      matcher: new RegExp(
+      regex: new RegExp(
         `\/foo\/${pathAllowedCharsRegex.source}(\/${
           pathAllowedCharsRegex.source
         })?\/?`,
       ),
+      segments: [null, 'bar', 'baz'],
     });
   });
 
   test('Path with params checkers as string', () => {
     expect(
-      pathMatcher.compilePath({
-        path: '/foo/{bar}',
+      pathMatcher.compileTemplate({
+        template: '/foo/{bar}',
         name: 'my_path_name',
         paramsChecks: {
           bar: '[0-9]*',
         },
       }),
     ).toEqual({
-      path: '/foo/{bar}',
+      template: '/foo/{bar}',
       name: 'my_path_name',
-      matcher: new RegExp(`\/foo\/[0-9]*\/?`),
+      regex: new RegExp(`\/foo\/[0-9]*\/?`),
+      segments: [null, 'bar'],
     });
   });
 
   test('Path with params checkers as regex', () => {
     expect(
-      pathMatcher.compilePath({
-        path: '/foo/{bar}',
+      pathMatcher.compileTemplate({
+        template: '/foo/{bar}',
         name: 'my_path_name',
         paramsChecks: {
           bar: /[0-9]*/,
         },
       }),
     ).toEqual({
-      path: '/foo/{bar}',
+      template: '/foo/{bar}',
       name: 'my_path_name',
-      matcher: new RegExp(`\/foo\/[0-9]*\/?`),
+      regex: new RegExp(`\/foo\/[0-9]*\/?`),
+      segments: [null, 'bar'],
     });
   });
 })();

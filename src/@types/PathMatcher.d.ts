@@ -1,31 +1,42 @@
 declare namespace PathMatcher {
-  export interface IPathToCompile {
+  export interface ITemplateToCompile {
     name?: string;
     paramsChecks?: {
       [key: string]: RegExp | string;
     };
-    path: string;
+    template: string;
   }
 
-  export interface ICompiledPath {
-    matcher: RegExp;
+  export interface ICompiledTemplate {
     name: string;
-    path: string;
+    regex: RegExp;
+    segments: Array<string | null>;
+    template: string;
+  }
+
+  export interface IPathTestResult {
+    name: string;
+    pathname: string;
+    segments: {
+      [key: string]: string | null;
+    };
+    template: string;
   }
 
   export interface IPathMatcher {
-    addMatcher: (pathToAdd: ICompiledPath) => void;
-    findPath: (pathname: string) => void | false;
-    paths: { [key: string]: ICompiledPath };
-    testPath: (pathname: string, template: string) => boolean;
-    compilePath: (
-      pathToCompileParam: PathMatcher.IPathToCompile | string,
-    ) => PathMatcher.ICompiledPath;
+    readonly addTemplate: (templateToAdd: ICompiledTemplate) => void;
+    readonly compiledTemplates: Array<ICompiledTemplate>;
+    readonly compileTemplate: (
+      templateToCompile: PathMatcher.ITemplateToCompile | string,
+    ) => PathMatcher.ICompiledTemplate;
+    readonly findPath: (pathname: string) => void | false;
+    readonly testPath: (
+      pathname: string,
+      template: string,
+    ) => boolean | IPathTestResult;
+    readonly testPathAgainstCompiledTemplate: (
+      pathname: string,
+      compiledTemplate: ICompiledTemplate,
+    ) => boolean | IPathTestResult;
   }
 }
-
-//test: (pathToMatch: string) => { [key: string]: RegExp | string } | false;
-
-// test: (pathToMatch: string) => {
-//   return pathToMatch ? false : false;
-// },

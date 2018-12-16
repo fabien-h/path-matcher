@@ -3,26 +3,30 @@
  */
 const pathAllowedCharsRegex = /([a-z]|[A-Z]|[0-9]|\.|\-|\_|\~|\!|\$|\&|\'|\(|\)|\*|\+|\,|\;|\=|\:|\@|\%|\?|\#|\[|\])*/;
 
-const createMatcher = (
-  pathToCompileParam: PathMatcher.IPathToCompile | string,
-): PathMatcher.ICompiledPath => {
+const compileTemplate = (
+  pathToCompileParam: PathMatcher.ITemplateToCompile | string,
+): PathMatcher.ICompiledTemplate => {
   /**
    * Check and format the initial paht to compile as an object
    */
-  let pathToCompile: PathMatcher.IPathToCompile;
+  let pathToCompile: PathMatcher.ITemplateToCompile;
   if (typeof pathToCompileParam === 'string')
     pathToCompile = {
-      path: pathToCompileParam,
+      template: pathToCompileParam,
       name: pathToCompileParam,
     };
   else pathToCompile = pathToCompileParam;
   if (
-    !pathToCompile.path ||
-    typeof pathToCompile.path !== 'string' ||
-    / /.test(pathToCompile.path)
+    !pathToCompile.template ||
+    typeof pathToCompile.template !== 'string' ||
+    / /.test(pathToCompile.template)
   )
-    throw new TypeError('Invalid path. Need to be a string without spaces.');
-  if (!pathToCompile.name) pathToCompile.name = pathToCompile.path;
+    throw new TypeError(
+      `Invalid path. Need to be a string without spaces. Faulty path: "${
+        pathToCompile.template
+      }"`,
+    );
+  if (!pathToCompile.name) pathToCompile.name = pathToCompile.template;
   if (typeof pathToCompileParam !== 'string' && pathToCompileParam.paramsChecks)
     pathToCompile.paramsChecks = pathToCompileParam.paramsChecks;
   else pathToCompile.paramsChecks = {};
@@ -30,7 +34,8 @@ const createMatcher = (
   /**
    * Build the regular expression from the parametters
    */
-  const params: Array<string> = pathToCompile.path.split('/');
+  const params: Array<string> = pathToCompile.template.split('/');
+  const segments: Array<string | null> = [];
   const matcher = new RegExp(
     `${params
       .map(
@@ -51,6 +56,7 @@ const createMatcher = (
              */
             const isOptionnal = /(.*)\?/.test(key);
             key = key.replace(/\?/g, '');
+            segments.push(key);
 
             /**
              * Check if we have a defined regex for the key,
@@ -78,6 +84,7 @@ const createMatcher = (
           /**
            * Hardcoded param
            */
+          segments.push(null);
           return `/${param}`;
         },
       )
@@ -89,10 +96,11 @@ const createMatcher = (
   );
 
   return {
-    matcher,
     name: pathToCompile.name,
-    path: pathToCompile.path,
+    regex: matcher,
+    segments,
+    template: pathToCompile.template,
   };
 };
 
-export default createMatcher;
+export default compileTemplate;

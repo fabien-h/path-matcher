@@ -1,7 +1,7 @@
 {
   "name": "@acta/path-matcher",
   "version": "1.0.0",
-  "description": "Compile a regex matcher from a path template and test paths against a regex matcher.",
+  "description": "Compile a regex matcher from a template and test paths against a regex matcher.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "files": [
