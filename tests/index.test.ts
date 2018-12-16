@@ -1,1 +1,3 @@
-import './buildRegexFromPaths';
+import './compilePathFromStrings';
+import './compilePathFromObjects';
+import './testPath';

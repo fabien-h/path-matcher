@@ -32,7 +32,9 @@ const testPath = (pathname: string, template: string): boolean => {
    */
   const matcher = compilePath(template);
 
-  console.log(pathname, matcher);
+  console.log(matcher.matcher);
+  console.log(matcher.matcher.test('/popo'));
+  console.log(matcher.matcher.test('/popo'));
 
   return false;
 };
