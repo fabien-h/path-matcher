@@ -1,5 +1,5 @@
 (() => {
-  const pathMatcher = require('../dist/index.js');
+  const pathMatcher = require('../dist/index.umd.js');
   const pathAllowedCharsRegex = /([a-z]|[A-Z]|[0-9]|\.|\-|\_|\~|\!|\$|\&|\'|\(|\)|\*|\+|\,|\;|\=|\:|\@|\%|\?|\#|\[|\])*/;
 
   describe('Build matchers from strings', () => {

@@ -1,5 +1,5 @@
 (() => {
-  const pathMatcher = require('../dist/index.js');
+  const pathMatcher = require('../dist/index.umd.js');
 
   describe('Test path against a template', () => {
     test('Path against template hardcoded', () => {

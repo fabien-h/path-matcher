@@ -1,6 +1,7 @@
-import typescript from 'rollup-plugin-typescript2';
-import copy from 'rollup-plugin-copy';
 import _package from './package.json';
+import commonjs from 'rollup-plugin-commonjs';
+import sourceMaps from 'rollup-plugin-sourcemaps';
+import typescript from 'rollup-plugin-typescript2';
 
 export default {
   input: 'src/index.ts',
@@ -9,6 +10,11 @@ export default {
       file: _package.main,
       format: 'umd',
       name: 'path-matcher',
+      sourcemap: true,
+    },
+    {
+      file: _package.module,
+      format: 'es',
       sourcemap: true,
     },
   ],
@@ -23,8 +29,7 @@ export default {
     typescript({
       typescript: require('typescript'),
     }),
-    copy({
-      'src/@types': 'dist/@types',
-    }),
+    commonjs(),
+    sourceMaps(),
   ],
 };

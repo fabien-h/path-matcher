@@ -1,7 +1,9 @@
+import { ICompiledTemplate, IPathTestResult } from './types';
+
 const testPathAgainstCompiledTemplate = (
   pathname: string,
-  compiledTemplate: PathMatcher.ICompiledTemplate,
-): boolean | PathMatcher.IPathTestResult => {
+  compiledTemplate: ICompiledTemplate,
+): boolean | IPathTestResult => {
   /**
    * Test the path
    */

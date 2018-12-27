@@ -1,3 +1,4 @@
+import { IPathTestResult } from './types';
 import compileTemplate from './compileTemplate';
 import testPathAgainstCompiledTemplate from './testPathAgainstCompiledTemplate';
 
@@ -7,7 +8,7 @@ import testPathAgainstCompiledTemplate from './testPathAgainstCompiledTemplate';
 const testPath = (
   pathname: string,
   template: string,
-): boolean | PathMatcher.IPathTestResult => {
+): boolean | IPathTestResult => {
   /**
    * Check the regex to test
    */

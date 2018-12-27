@@ -1,15 +1,17 @@
+import { ITemplateToCompile, ICompiledTemplate } from './types';
+
 /**
  * Authorized characters, see https://tools.ietf.org/html/rfc3986#section-2
  */
-const pathAllowedCharsRegex = /([a-z]|[A-Z]|[0-9]|\.|\-|\_|\~|\!|\$|\&|\'|\(|\)|\*|\+|\,|\;|\=|\:|\@|\%|\?|\#|\[|\])*/;
+const pathAllowedCharsRegex: RegExp = /([a-z]|[A-Z]|[0-9]|\.|\-|\_|\~|\!|\$|\&|\'|\(|\)|\*|\+|\,|\;|\=|\:|\@|\%|\?|\#|\[|\])*/;
 
 const compileTemplate = (
-  pathToCompileParam: PathMatcher.ITemplateToCompile | string,
-): PathMatcher.ICompiledTemplate => {
+  pathToCompileParam: ITemplateToCompile | string,
+): ICompiledTemplate => {
   /**
    * Check and format the initial paht to compile as an object
    */
-  let pathToCompile: PathMatcher.ITemplateToCompile;
+  let pathToCompile: ITemplateToCompile;
   if (typeof pathToCompileParam === 'string')
     pathToCompile = {
       template: pathToCompileParam,
@@ -36,7 +38,7 @@ const compileTemplate = (
    */
   const params: Array<string> = pathToCompile.template.split('/');
   const segments: Array<string | null> = [];
-  const matcher = new RegExp(
+  const matcher: RegExp = new RegExp(
     `${params
       .map(
         (param: string): string => {
@@ -88,10 +90,7 @@ const compileTemplate = (
           return `/${param}`;
         },
       )
-      .filter((param: string) => {
-        // console.log(param);
-        return Boolean(param);
-      })
+      .filter((param: string): boolean => Boolean(param))
       .join('')}/?`,
   );
 

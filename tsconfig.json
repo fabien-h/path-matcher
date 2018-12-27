@@ -1,31 +1,37 @@
 {
   "typeAcquisition": { "enable": true },
   "compilerOptions": {
-    /* Build '.d.ts' file. */
+    /* Declarations and maps */
+    "alwaysStrict": true,
     "declaration": true,
-    "declarationDir": "./dist",
+    "declarationDir": "dist/types",
+    "sourceMap": true,
     /* Code quality */
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "noFallthroughCasesInSwitch": true,
-    /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "skipLibCheck": true,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    /* Module strategy */
+    "lib": ["es2015", "es2016", "es2017", "dom"],
+    "module": "es2015",
     "moduleResolution": "node",
-    "module": "es6",
     "target": "es5",
-    "lib": ["es2017"],
-    /* Base directory to resolve non-absolute module names. */
-    "baseUrl": "./",
-    /* List of folders to include type definitions from. */
-    "typeRoots": ["./src/@types", "node_modules/@types"],
-    /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
-    "allowSyntheticDefaultImports": true,
-    "outDir": "./dist"
+    /* Folders */
+    "baseUrl": "src",
+    "outDir": "dist/lib",
+    "rootDir": "src",
+    "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["node_modules", "tests", "dist"],
-  "include": ["./src/**/*.*"]
+  "include": ["src"]
 }

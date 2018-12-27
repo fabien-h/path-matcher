@@ -1,19 +1,32 @@
 {
   "name": "@acta/path-matcher",
   "version": "1.0.0",
-  "description": "Compile a regex matcher from a template and test paths against a regex matcher.",
-  "main": "dist/index.js",
-  "module": "dist/index.es.js",
+  "description": "Compile a regex matcher from a path template and test real paths against it.",
+  "main": "dist/index.umd.js",
+  "module": "dist/index.es5.js",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "types": "dist/index.d.ts",
+  "keywords": [
+    "acta",
+    "path",
+    "matcher",
+    "path matcher"
+  ],
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "scripts": {
     "build:dev-watch": "rollup -w --config rollup.config.dev.js",
-    "build": "rollup --config rollup.config.prod.js",
-    "dev": "concurrently \"npm run build:dev-watch\" \"npm run test\"",
-    "release": "release-it --dry-run",
-    "test": "jest --watch"
+    "build": "rimraf dist && tsc --module commonjs && rollup --config rollup.config.build.js",
+    "dev": "rimraf dist && concurrently \"npm run build:dev-watch\" \"npm run test:dev\" --kill-others --restartTries 2 --restartDelay 200",
+    "release": "npm run build && release-it",
+    "test:dev": "jest --watchAll"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fabien-h/path-macther.git"
   },
   "author": "Fabien Huet <fabien.huet@gmail.com> (https://wax-o.com)",
   "license": "MIT",
@@ -21,12 +34,21 @@
     "@types/jest": "^23.3.10",
     "concurrently": "^4.1.0",
     "jest": "^23.6.0",
-    "release-it": "^9.1.0",
-    "rollup": "^0.67.4",
+    "release-it": "^9.3.0",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.68.2",
+    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-copy": "^0.2.3",
+    "rollup-plugin-sourcemaps": "^0.4.2",
     "rollup-plugin-typescript2": "^0.18.1",
-    "rollup-plugin-uglify": "^6.0.0",
     "ts-jest": "^23.10.5",
     "typescript": "^3.2.2"
+  },
+  "bugs": {
+    "url": "https://github.com/fabien-h/path-matcher/issues"
+  },
+  "homepage": "https://github.com/fabien-h/path-matcher#readme",
+  "directories": {
+    "test": "tests"
   }
 }

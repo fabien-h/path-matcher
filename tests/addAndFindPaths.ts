@@ -1,5 +1,5 @@
 (() => {
-  const pathMatcher = require('../dist/index.js');
+  const pathMatcher = require('../dist/index.umd.js');
 
   pathMatcher.addTemplate('/foo/{bar}');
   pathMatcher.addTemplate('/foo/super');
