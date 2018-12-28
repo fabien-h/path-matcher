@@ -5,6 +5,14 @@
 
 Compile a regex matcher from a path template and test paths against a regex matcher. This is meant to be used as an utilit for a router.
 
+## Table of Contents
+
+- [Basic use case](#basic-use-case)
+- [Store compiled templates](#store-compiled-templates)
+- [Test against a compiled template](#test-against-a-compiled-template)
+- [Check if a path matches a stored template](#check-if-a-path-matches-a-stored-template)
+- [Dev scripts](#dev-scripts)
+
 ## Basic use case
 
 Test a path against a template with `testPath( path, template )`. If the path matches with the template, an object with the name, the pathname and the segment values is returned. Otherwise, the test returns false.
@@ -137,3 +145,5 @@ Scripts :
 - `npm run dev` to dev (build, test and watch)
 - `npm run build` to build the production version
 - `npm run release` to release a new version. Relies on [release-it](https://github.com/webpro/release-it) for deployments.
+
+Publish with `npm publish --access=public`.
