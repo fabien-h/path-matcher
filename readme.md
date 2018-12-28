@@ -3,7 +3,7 @@
 
 # Path-Matcher @acta/path-matcher
 
-Compile a regex matcher from a path template and test paths against a regex matcher. This is meant to be used as an utilit for a router.
+To compile a regex matcher from a path template and test paths against a regex matcher. This is meant to be used as an utilit for a router.
 
 ## Table of Contents
 
@@ -146,4 +146,6 @@ Scripts :
 - `npm run build` to build the production version
 - `npm run release` to release a new version. Relies on [release-it](https://github.com/webpro/release-it) for deployments.
 
-Publish with `npm publish --access=public`.
+To develop in local using the package from another application or package, go for a symlink: `npm link /the/absolute/path/url`.
+
+To publish: `npm publish --access=public`.
