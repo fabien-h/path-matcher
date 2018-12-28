@@ -1,4 +1,9 @@
-import { IPathMatcher, ITemplateToCompile, ICompiledTemplate } from './types';
+import {
+  IPathMatcher,
+  ITemplateToCompile,
+  ICompiledTemplate,
+  IPathTestResult,
+} from './types';
 import compileTemplate from './compileTemplate';
 import testPathAgainstCompiledTemplate from './testPathAgainstCompiledTemplate';
 import testPath from './testPath';
@@ -24,23 +29,19 @@ const addTemplate = (templateToAdd: ITemplateToCompile | string): void => {
 /**
  * Find a path in the list
  */
-const findPath = (pathname: string): void => {
-  console.log(pathname);
-
-  for (const compiledPath of matcher.compiledTemplates) {
-    console.log('compiledPath', compiledPath);
-    console.log(compiledPath.regex.test(pathname));
+const hasPath = (pathname: string): false | IPathTestResult => {
+  let result: false | IPathTestResult = false;
+  for (const compiledTemplate of matcher.compiledTemplates) {
+    result = testPathAgainstCompiledTemplate(pathname, compiledTemplate);
+    if (Boolean(result)) break;
   }
-
-  // for (const compiledPath of Object.values(matcher.paths)) {
-  //   console.log(compiledPath);
-  // }
+  return result;
 };
 
 const matcher: IPathMatcher = {
   addTemplate,
   compileTemplate,
-  findPath,
+  hasPath,
   compiledTemplates: [],
   testPathAgainstCompiledTemplate,
   testPath,

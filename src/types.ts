@@ -28,7 +28,7 @@ export interface IPathMatcher {
   readonly compileTemplate: (
     templateToCompile: ITemplateToCompile | string,
   ) => ICompiledTemplate;
-  readonly findPath: (pathname: string) => void | false;
+  readonly hasPath: (pathname: string) => false | IPathTestResult;
   readonly testPath: (
     pathname: string,
     template: string,
@@ -36,5 +36,5 @@ export interface IPathMatcher {
   readonly testPathAgainstCompiledTemplate: (
     pathname: string,
     compiledTemplate: ICompiledTemplate,
-  ) => boolean | IPathTestResult;
+  ) => false | IPathTestResult;
 }

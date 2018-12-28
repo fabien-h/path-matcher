@@ -3,7 +3,7 @@ import { ICompiledTemplate, IPathTestResult } from './types';
 const testPathAgainstCompiledTemplate = (
   pathname: string,
   compiledTemplate: ICompiledTemplate,
-): boolean | IPathTestResult => {
+): false | IPathTestResult => {
   /**
    * Test the path
    */

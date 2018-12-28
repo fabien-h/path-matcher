@@ -1,8 +1,8 @@
 (() => {
   const pathMatcher = require('../dist/index.umd.js');
 
-  describe('Test path against a template', () => {
-    test('Path against template hardcoded', () => {
+  describe('Test path against a template.', () => {
+    test('Path against template hardcoded.', () => {
       expect(pathMatcher.testPath('/foo/bar', '/foo/bar')).toEqual({
         name: '/foo/bar',
         pathname: '/foo/bar',
@@ -11,7 +11,7 @@
       });
     });
 
-    test('Path against template with param', () => {
+    test('Path against template with param.', () => {
       expect(pathMatcher.testPath('/foo/bar', '/foo/{baz}')).toEqual({
         name: '/foo/{baz}',
         pathname: '/foo/bar',
@@ -20,7 +20,7 @@
       });
     });
 
-    test('Path against template with optional param', () => {
+    test('Path against template with optional param.', () => {
       expect(pathMatcher.testPath('/foo', '/foo/{bar?}')).toEqual({
         name: '/foo/{bar?}',
         pathname: '/foo',
@@ -29,15 +29,15 @@
       });
     });
 
-    test('Wrong hardcoded path', () => {
-      expect(pathMatcher.testPath('/baz', '/foo/bar')).toEqual(false);
+    test('Wrong hardcoded path.', () => {
+      expect(pathMatcher.testPath('/bar/foo', '/foo/bar')).toEqual(false);
     });
 
-    test('Wrong path with params', () => {
+    test('Wrong path with params.', () => {
       expect(pathMatcher.testPath('/baz', '/foo/{bar}')).toEqual(false);
     });
 
-    test('Wrong path longer tham params', () => {
+    test('Wrong path longer tham params.', () => {
       expect(pathMatcher.testPath('/foo/bar/baz', '/foo/{bar}')).toEqual(false);
     });
   });
