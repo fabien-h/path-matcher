@@ -23,7 +23,7 @@ export interface IPathTestResult {
 }
 
 export interface IPathMatcher {
-  readonly addTemplate: (templateToAdd: ICompiledTemplate) => void;
+  readonly addTemplate: (templateToAdd: ITemplateToCompile) => void;
   readonly compiledTemplates: Array<ICompiledTemplate>;
   readonly compileTemplate: (
     templateToCompile: ITemplateToCompile | string,
