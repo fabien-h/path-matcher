@@ -28,6 +28,7 @@ export default {
   plugins: [
     typescript({
       typescript: require('typescript'),
+      useTsconfigDeclarationDir: true,
     }),
     commonjs(),
     sourceMaps(),
