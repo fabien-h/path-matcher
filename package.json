@@ -31,10 +31,10 @@
   "author": "Fabien Huet <fabien.huet@gmail.com> (https://wax-o.com)",
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^23.3.10",
+    "@types/jest": "^23.3.11",
     "concurrently": "^4.1.0",
     "jest": "^23.6.0",
-    "release-it": "^9.4.0",
+    "release-it": "^9.4.3",
     "rimraf": "^2.6.2",
     "rollup": "^1.0.0",
     "rollup-plugin-commonjs": "^9.2.0",
