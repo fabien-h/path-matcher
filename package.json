@@ -50,5 +50,8 @@
   "homepage": "https://github.com/fabien-h/path-matcher#readme",
   "directories": {
     "test": "tests"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
