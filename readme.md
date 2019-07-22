@@ -3,6 +3,8 @@
 
 # Path-Matcher @acta/path-matcher
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fabien-h/path-matcher.svg)](https://greenkeeper.io/)
+
 To compile a regex matcher from a path template and test paths against a regex matcher. This is meant to be used as an utilit for a router.
 
 ## Table of Contents
